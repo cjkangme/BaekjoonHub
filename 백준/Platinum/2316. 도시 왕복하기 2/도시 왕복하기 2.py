@@ -12,7 +12,7 @@ def BFS(source, sink, visited):
 
     while que and visited[sink] == -1:
         sv = que.popleft()
-        for dv in range(1, N*2+2):
+        for dv in graph[sv]:
             if capacity[sv][dv] - flow[sv][dv] > 0 and visited[dv] == -1:
                 visited[dv] = sv
                 que.append(dv)
@@ -55,6 +55,7 @@ def edmonds_karp(source, sink):
 
 
 N, P = map(int, input().split())
+graph = [[] for _ in range(MAX_N)]
 capacity = [[0] * MAX_N for _ in range(MAX_N)]
 flow = [[0] * MAX_N for _ in range(MAX_N)]
 
@@ -66,11 +67,19 @@ for _ in range(P):
     dv_in = dv * 2 - 1
     dv_out = dv_in + 1
 
+    graph[sv_out].append(dv_in)
+    graph[dv_in].append(sv_out)
+
+    graph[dv_out].append(sv_in)
+    graph[sv_in].append(dv_out)
+
     capacity[sv_out][dv_in] = 1
     capacity[dv_out][sv_in] = 1
 for i in range(1, N+1):
     sv = i * 2 - 1
     dv = sv + 1
+    graph[sv].append(dv)
+    graph[dv].append(sv)
     capacity[sv][dv] = 1
 
 print(edmonds_karp(1, 3))
