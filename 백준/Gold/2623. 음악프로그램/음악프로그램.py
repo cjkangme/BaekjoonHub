@@ -14,11 +14,12 @@ for _ in range(M):
     temp = list(map(int, input().split()))
     length = temp[0]
     # 먼저 불러야하는 사람 수, 뒷 순서로 불러야할 사람 업데이트
-    for i in range(1, length+1):
+    # 첫번째 부르는 사람은 앞사람이 없으므로 두번째부터 시작
+    for i in range(2, length+1):
+        prev_s = temp[i-1]
         s = temp[i]
-        num_prev[s] += i-1
-        for j in range(i+1, length+1):
-            list_next[s].append(temp[j])
+        num_prev[s] += 1
+        list_next[prev_s].append(s)
 # 위상정렬 위해 큐 초기화
 que = deque()
 for idx, num in enumerate(num_prev):
