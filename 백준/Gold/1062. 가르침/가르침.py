@@ -12,17 +12,15 @@ def word2bit(word):
 N, K = map(int, input().split())
 words = [input().rstrip() for _ in range(N)]
 bits = list(map(word2bit, words))
-base_word = word2bit('antic')
+base_bit = word2bit('antic')
 
 if K < 5:
     print(0)
 else:
-    alphabet = set([chr(i) for i in range(ord('a'), ord('z')+1)])
-    alphabet = alphabet - set(['a', 'n', 't', 'i', 'c'])
+    alphabet = [1 << i for i in range(26) if not (base_bit & 1 << i)]
     answer = 0
     for combination in combinations(alphabet, K-5):
-        know_word = list(combination)
-        know_bit = base_word | word2bit(know_word)
+        know_bit = sum(combination) | base_bit
         count = 0
         for bit in bits:
             if bit & know_bit == bit:
