@@ -18,7 +18,4 @@ if __name__ == "__main__":
     N = int(input())
     answer = draw(N)
     
-    for i in range(N):
-        for j in range(N):
-            print("".join(answer[i][j]), end="")
-        print()
+    print("\n".join(answer))
