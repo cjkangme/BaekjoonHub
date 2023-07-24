@@ -4,8 +4,7 @@ import sys
 input = sys.stdin.readline
 
 class Node(object):
-    def __init__(self, key, has_end=False):
-        self.key = key
+    def __init__(self, has_end=False):
         self.has_end = has_end
         self.children = dict()
 
@@ -20,7 +19,7 @@ class Trie(object):
         for d in num:
             # 현재 노드에 해당하는 숫자의 자식이 없으면 생성
             if curr_node.children.get(d) is None:
-                curr_node.children[d] = Node(d)
+                curr_node.children[d] = Node()
             # 해당하는 숫자 자식으로 이동
             curr_node = curr_node.children[d]
         # 자료구조 말단에서 끝 표시
