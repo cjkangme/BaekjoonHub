@@ -1,33 +1,19 @@
-def bit_to_num(bits):
-    digit = 1
-    num = 0
-    
-    while bits:
-        if bits & 1:
-            num += digit
-        bits = bits >> 1
-        digit *= 3
-    
-    return num
-        
+import sys
 
 if __name__=="__main__":
-    N = int(input())
-    flag = False
-    temp = N
-    digit = 0
+    num = int(input())
     
-    while temp >= 3:
-        temp //= 3
-        digit += 1 
+    if num == 0:
+        print("NO")
+        sys.exit(0)
     
-    # 비트마스크
-    for bits in range(1, 2 ** (digit+1)):
-        num = bit_to_num(bits)
-        if num == N:
-            flag = True
-            break
-        elif num > N:
-            break
+    digit = 1
+    while digit < num:
+        digit *= 3
     
-    print("YES" if flag else "NO")  
+    while digit:
+        if num >= digit:
+            num -= digit
+        digit //= 3
+    
+    print("NO" if num else "YES")
