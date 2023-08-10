@@ -23,15 +23,15 @@ if __name__ == "__main__":
     N, K, M = map(int, input().split())
     distance = [INF] * (N+1) # 1번 역부터의 거리
     distance[1] = 1
-    idx_set = [set() for _ in range(N+1)]
+    idx_set = [[] for _ in range(N+1)]
     
     hypertubes = []
     for i in range(M):
         hypertube = list(map(int, input().split()))
         for tube in hypertube:
-            idx_set[tube].add(i)
+            idx_set[tube].append(i)
         hypertubes.append(hypertube)
     
     bfs()
-        
+    
     print(distance[N] if distance[N] != INF else -1)
