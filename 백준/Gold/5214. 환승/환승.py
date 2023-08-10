@@ -34,5 +34,4 @@ if __name__ == "__main__":
     
     bfs()
         
-    
     print(distance[N] if distance[N] != INF else -1)
